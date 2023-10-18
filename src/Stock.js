@@ -10,7 +10,6 @@ class Stock extends React.Component {
       stockChartYValues: [],
     };
 
-    // Bind the fetchStock function to this instance
     this.fetchStock = this.fetchStock.bind(this);
   }
 
@@ -46,14 +45,14 @@ class Stock extends React.Component {
             stockChartYValues: stockChartYValuesFunction,
           });
         }.bind(this)
-      ); // Bind this context to the inner function
+      );
   }
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h1>Stock Market</h1>
-        <div>
+        <div className="input-container">
           <label htmlFor="tickerSymbol">Enter Ticker Symbol:</label>
           <input
             type="text"
@@ -64,23 +63,25 @@ class Stock extends React.Component {
           />
           <button onClick={this.fetchStock}>Fetch</button>
         </div>
-        <Plot
-          data={[
-            {
-              x: this.state.stockChartXValues,
-              y: this.state.stockChartYValues,
-              type: "scatter",
-              mode: "lines+markers",
-              marker: { color: "red" },
-            },
-          ]}
-          layout={{
-            width: 800,
-            height: 500,
-            title: this.state.tickerSymbol + " Stock Prices Last 100 days",
-            plot_bgcolor: "transparent",
-          }}
-        />
+        <div className="plot">
+          <Plot
+            data={[
+              {
+                x: this.state.stockChartXValues,
+                y: this.state.stockChartYValues,
+                type: "scatter",
+                mode: "lines+markers",
+                marker: { color: "red" },
+              },
+            ]}
+            layout={{
+              width: 800,
+              height: 500,
+              title: this.state.tickerSymbol + " Stock Prices Last 100 days",
+              plot_bgcolor: "transparent",
+            }}
+          />
+        </div>
       </div>
     );
   }
