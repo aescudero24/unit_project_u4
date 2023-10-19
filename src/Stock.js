@@ -61,7 +61,7 @@ class Stock extends React.Component {
             value={this.state.tickerSymbol}
             onChange={this.handleInputChange}
           />
-          <button onClick={this.fetchStock}>Fetch</button>
+          <button onClick={this.fetchStock}>Search</button>
         </div>
         <div className="plot">
           <Plot
