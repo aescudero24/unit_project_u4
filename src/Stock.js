@@ -6,8 +6,8 @@ class Stock extends React.Component {
     super(props);
     this.state = {
       tickerSymbol: "AMZN",
-      stockChartXValues: [],
-      stockChartYValues: [],
+      stockWaveXValues: [],
+      stockWaveYValues: [],
     };
 
     this.fetchStock = this.fetchStock.bind(this);
@@ -24,8 +24,8 @@ class Stock extends React.Component {
   fetchStock() {
     const API_KEY = "FBNKWJXO6VT8FNOE";
     const API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${this.state.tickerSymbol}&outputsize=compact&apikey=${API_KEY}`;
-    let stockChartXValuesFunction = [];
-    let stockChartYValuesFunction = [];
+    let stockWaveXValuesFunction = [];
+    let stockWaveYValuesFunction = [];
 
     fetch(API_Call)
       .then(function (response) {
@@ -34,15 +34,15 @@ class Stock extends React.Component {
       .then(
         function (data) {
           for (var date in data["Time Series (Daily)"]) {
-            stockChartXValuesFunction.push(date);
-            stockChartYValuesFunction.push(
+            stockWaveXValuesFunction.push(date);
+            stockWaveYValuesFunction.push(
               data["Time Series (Daily)"][date]["1. open"]
             );
           }
 
           this.setState({
-            stockChartXValues: stockChartXValuesFunction,
-            stockChartYValues: stockChartYValuesFunction,
+            stockWaveXValues: stockWaveXValuesFunction,
+            stockWaveYValues: stockWaveYValuesFunction,
           });
         }.bind(this)
       );
@@ -67,8 +67,8 @@ class Stock extends React.Component {
           <Plot
             data={[
               {
-                x: this.state.stockChartXValues,
-                y: this.state.stockChartYValues,
+                x: this.state.stockWaveXValues,
+                y: this.state.stockWaveYValues,
                 type: "scatter",
                 mode: "lines+markers",
                 marker: { color: "red" },
@@ -78,7 +78,6 @@ class Stock extends React.Component {
               width: 800,
               height: 500,
               title: this.state.tickerSymbol + " Stock Prices Last 100 days",
-              plot_bgcolor: "transparent",
             }}
           />
         </div>
