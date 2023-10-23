@@ -51,7 +51,7 @@ class Stock extends React.Component {
   render() {
     return (
       <div className="container">
-        <h1>Stock Market</h1>
+        <h1>StockWave</h1>
         <div className="input-container">
           <label htmlFor="tickerSymbol">Enter Ticker Symbol:</label>
           <input
